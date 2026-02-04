@@ -1,0 +1,707 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gabriela Salviatti | UGC Creator</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"/>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Outfit:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root{
+      --bg-warm: #FBF8F4;
+      --bg-cream: #F5EDE4;
+      --text-dark: #2D2A26;
+      --accent-terracotta: #C4846C;
+      --accent-sage: #8B9A7D;
+      --shadow-soft: 0 20px 40px rgba(45, 42, 38, 0.10);
+
+      /* Instagram-ish gradient */
+      --ig-1: #feda75;
+      --ig-2: #fa7e1e;
+      --ig-3: #d62976;
+      --ig-4: #962fbf;
+      --ig-5: #4f5bd5;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg-warm);
+      color: var(--text-dark);
+      font-family: "Outfit", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+    .font-heading { font-family: "Cormorant Garamond", serif; }
+
+    /* Navbar */
+    .nav-glass {
+      background: rgba(251, 248, 244, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0,0,0,0.04);
+    }
+
+    /* Buttons */
+    .btn-primary-custom {
+      border: none;
+      color: #fff;
+      background: linear-gradient(135deg, #C4846C 0%, #B5755D 100%);
+      transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease;
+    }
+    .btn-primary-custom:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(196, 132, 108, 0.28);
+    }
+    .btn-outline-custom {
+      border: 2px solid var(--accent-terracotta);
+      color: var(--accent-terracotta);
+      background: transparent;
+      transition: background .2s ease, transform .2s ease;
+    }
+    .btn-outline-custom:hover{
+      background: rgba(255,255,255,0.55);
+      transform: translateY(-1px);
+    }
+
+    /* Sections */
+    .section-cream { background: var(--bg-cream); }
+    .section-pad { padding: 96px 0; }
+
+    /* Cards */
+    .glass-card {
+      background: rgba(255,255,255,0.70);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.6);
+      border-radius: 1.5rem;
+    }
+
+    /* Hero */
+    .hero-badge {
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      font-size: .85rem;
+      color: var(--accent-terracotta);
+    }
+    .hero-art {
+      border-radius: 1.75rem;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.65);
+      box-shadow: var(--shadow-soft);
+      background: linear-gradient(145deg, #E8DED4 0%, #D4C5B5 100%);
+      aspect-ratio: 4/5;
+    }
+    .hero-art img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .orb {
+      position: absolute;
+      border-radius: 999px;
+      pointer-events: none;
+      opacity: .25;
+    }
+    .orb.orb-1{
+      width: 280px; height: 280px;
+      top: 80px; right: 30px;
+      background: radial-gradient(circle, var(--accent-terracotta) 0%, transparent 70%);
+    }
+    .orb.orb-2{
+      width: 220px; height: 220px;
+      bottom: 90px; left: 20px;
+      background: radial-gradient(circle, var(--accent-sage) 0%, transparent 70%);
+      opacity: .18;
+    }
+
+    /* Social links */
+    .social-link{
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      color: var(--text-dark);
+      text-decoration: none;
+    }
+    .social-link:hover{
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .social-ico{
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      display: inline-grid;
+      place-items: center;
+      background: rgba(255,255,255,0.75);
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+
+    /* Portfolio tiles with Instagram contour */
+    .tile {
+      position: relative;
+      border-radius: 1.25rem;
+      aspect-ratio: 9 / 16;
+      cursor: pointer;
+      transform: translateY(0);
+      transition: transform .25s ease, box-shadow .25s ease;
+      box-shadow: 0 0 0 rgba(0,0,0,0);
+    }
+    .tile:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-soft);
+    }
+
+    /* Instagram gradient “contour/border” */
+    .tile::before{
+      content:"";
+      position:absolute;
+      inset: -2px;               /* border thickness */
+      border-radius: 1.35rem;
+      background: conic-gradient(from 180deg,
+        var(--ig-1), var(--ig-2), var(--ig-3), var(--ig-4), var(--ig-5), var(--ig-3), var(--ig-2), var(--ig-1)
+      );
+      filter: saturate(1.1);
+    }
+
+    /* Inner container so the gradient stays as a border */
+    .tile-inner{
+      position:absolute;
+      inset: 2px;                /* matches border thickness above */
+      border-radius: 1.15rem;
+      overflow:hidden;
+      background: linear-gradient(145deg, #E8DED4 0%, #D4C5B5 100%);
+    }
+
+    .tile-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.02);
+      opacity: 1;
+    }
+    .tile-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,.60) 0%, rgba(0,0,0,0) 55%);
+    }
+
+    /* If a cover image is missing, we still show a clean fallback */
+    .tile-fallback{
+      position:absolute;
+      inset:0;
+      display:grid;
+      place-items:center;
+      background: linear-gradient(135deg, rgba(255,255,255,0.25), rgba(0,0,0,0.05));
+    }
+    .fallback-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:.6rem;
+      padding:.7rem 1rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.85);
+      border: 1px solid rgba(0,0,0,0.06);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+      font-weight: 600;
+    }
+
+    .tile-play {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+    }
+    .play-circle {
+      width: 64px;
+      height: 64px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.92);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.10);
+      display: grid;
+      place-items: center;
+      transition: transform .2s ease;
+    }
+    .tile:hover .play-circle { transform: scale(1.06); }
+    .play-triangle {
+      width: 0; height: 0;
+      border-left: 14px solid var(--accent-terracotta);
+      border-top: 9px solid transparent;
+      border-bottom: 9px solid transparent;
+      margin-left: 3px;
+    }
+    .tile-caption {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      padding: 14px 14px 12px;
+      color: #fff;
+    }
+    .tile-caption .kicker { font-size: .9rem; font-weight: 600; margin: 0; }
+    .tile-caption .sub { font-size: .8rem; opacity: .85; margin: 0; }
+
+    /* Small chips */
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .75rem 1rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.70);
+      border: 1px solid rgba(255,255,255,0.65);
+    }
+    .chip span { font-weight: 600; font-size: .95rem; }
+    .muted { opacity: .7; }
+
+    /* Modal video */
+    .modal-content { border-radius: 1rem; overflow: hidden; }
+    .video-wrap { background: #000; }
+    video { width: 100%; height: auto; display: block; }
+
+    /* Tiny helper line */
+    .hint-line{
+      font-size: .9rem;
+      opacity: .7;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg fixed-top nav-glass">
+    <div class="container py-2">
+      <a class="navbar-brand font-heading fw-semibold" href="#top" style="color: var(--text-dark);">
+        Gabriela Salviatti
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div id="navMenu" class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-3">
+          <li class="nav-item"><a class="nav-link" href="#work">Work</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+          <li class="nav-item">
+            <a class="btn btn-primary-custom px-4 py-2 rounded-pill ms-lg-2" href="#contact">
+              Let’s Connect
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header id="top" class="position-relative" style="padding-top: 110px;">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <div class="container section-pad">
+      <div class="row align-items-center g-5">
+
+        <!-- LEFT -->
+        <div class="col-lg-6 text-center text-lg-start">
+          <div class="hero-badge mb-3">Beauty &amp; Lifestyle UGC Creator</div>
+
+          <h1 class="font-heading display-3 fw-semibold mb-3" style="color: var(--text-dark);">
+            Gabriela Salviatti
+          </h1>
+
+          <p class="lead mb-3" style="max-width: 34rem;">
+            Creating authentic, scroll-stopping TikTok &amp; Instagram content for US brands.
+          </p>
+
+          <p class="mb-4" style="color: var(--accent-sage);">
+            Creating for US audiences
+          </p>
+
+          <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center justify-content-lg-start">
+            <a href="#work" class="btn btn-primary-custom btn-lg rounded-pill px-4">
+              View My Work ↓
+            </a>
+            <a href="mailto:bygsalviatti@gmail.com" class="btn btn-outline-custom btn-lg rounded-pill px-4">
+              Get in Touch
+            </a>
+          </div>
+
+          <!-- Socials -->
+          <div class="mt-4 d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start align-items-center">
+            <a class="text-decoration-none" href="mailto:bygsalviatti@gmail.com" style="color: var(--text-dark);">
+              📩 <span class="text-decoration-underline">bygsalviatti@gmail.com</span>
+            </a>
+
+            <a class="social-link" href="https://www.instagram.com/bygsalviatti/" target="_blank" rel="noopener">
+              <span class="social-ico" aria-hidden="true"><i class="bi bi-instagram"></i></span>
+              <span class="fw-semibold">@bygsalviatti</span>
+            </a>
+
+            <a class="social-link" href="https://www.tiktok.com/@bygsalviatti?_r=1&_t=ZS-93cjAlDcI8Q" target="_blank" rel="noopener">
+              <span class="social-ico" aria-hidden="true"><i class="bi bi-tiktok"></i></span>
+              <span class="fw-semibold">@bygsalviatti</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- RIGHT -->
+        <div class="col-lg-6">
+          <div class="hero-art">
+            <img
+              src="assets/img/hero.jpg"
+              alt="Gabriela Salviatti - UGC Creator"
+              onerror="this.style.display='none';"
+            />
+          </div>
+          <div class="small text-center text-lg-start mt-2 muted hint-line">
+            (Optional) If you want a hero photo later, put it at <code>assets/img/hero.jpg</code>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- ABOUT -->
+  <section id="about" class="section-cream section-pad">
+    <div class="container">
+      <div class="text-center mb-5">
+        <div class="hero-badge mb-2">Get to Know Me</div>
+        <h2 class="font-heading display-5 fw-semibold mb-0">About Me</h2>
+      </div>
+
+      <div class="glass-card p-4 p-md-5">
+        <div class="row g-4 align-items-center">
+          <div class="col-md-4 text-center text-md-start">
+            <img
+              src="assets/img/gabi.png"
+              class="img-fluid shadow-sm"
+              style="
+                width: 100%;
+                max-width: 320px;
+                aspect-ratio: 1 / 1;
+                object-fit: cover;
+                border-radius: 999px;
+                background: rgba(255,255,255,0.8);
+                border: 6px solid rgba(255,255,255,0.75);
+                box-shadow: 0 20px 40px rgba(45, 42, 38, 0.12);
+              "
+              alt="Gabriela Salviatti"
+              onerror="this.style.display='none';"
+            />
+            <div class="small muted mt-2 hint-line">
+              (Optional) Profile image: <code>assets/img/gabi.png</code>
+            </div>
+          </div>
+
+          <div class="col-md-8">
+            <p class="fs-5 mb-4" style="opacity: .85;">
+              I'm a beauty and lifestyle UGC creator with a passion for travel, fitness, and everyday rituals.
+              My content blends beauty routines, gym moments, coffee breaks, wine &amp; beer lifestyle, and travel stays.
+              With a mix of Brazilian warmth and American lifestyle culture, I create authentic, scroll-native content designed
+              to connect with US audiences in a natural, relatable, and engaging way.
+            </p>
+
+            <div class="d-flex flex-wrap gap-2 justify-content-center justify-content-md-start">
+              <span class="badge rounded-pill px-3 py-2" style="background: rgba(196,132,108,.15); color: var(--accent-terracotta);">Beauty</span>
+              <span class="badge rounded-pill px-3 py-2" style="background: rgba(139,154,125,.15); color: var(--accent-sage);">Lifestyle</span>
+              <span class="badge rounded-pill px-3 py-2" style="background: rgba(196,132,108,.15); color: var(--accent-terracotta);">Wellness</span>
+              <span class="badge rounded-pill px-3 py-2" style="background: rgba(139,154,125,.15); color: var(--accent-sage);">Travel</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- WORK / PORTFOLIO (ONLY CONTENT YOU HAVE) -->
+  <section id="work" class="section-pad">
+    <div class="container">
+      <div class="text-center mb-4">
+        <div class="hero-badge mb-2">Portfolio</div>
+        <h2 class="font-heading display-5 fw-semibold mb-2">Selected Work</h2>
+        <div class="muted">Tap to watch • Not Sponsored</div>
+      </div>
+
+      <div class="row g-3 g-md-4 mt-2">
+
+        <!-- 1) LIPSTICK -->
+        <div class="col-6 col-md-4">
+          <button class="w-100 border-0 bg-transparent p-0"
+            onclick="openVideo('assets/video/kjlipstick.mp4','Lipstick Color #104')"
+            aria-label="Open lipstick video">
+            <div class="tile">
+              <div class="tile-inner">
+                <!-- COVER (optional): put a real image at assets/img/lipstick-cover.jpg -->
+                <div class="tile-bg" style="background-image:url('assets/img/lipstick-cover.jpg');"></div>
+
+                <!-- If you don’t have a cover yet, this fallback badge still shows -->
+                <div class="tile-fallback">
+                  <div class="fallback-badge"><i class="bi bi-camera-video"></i> Lipstick #104</div>
+                </div>
+
+                <div class="tile-play">
+                  <div class="play-circle"><div class="play-triangle"></div></div>
+                </div>
+                <div class="tile-overlay"></div>
+                <div class="tile-caption">
+                  <p class="kicker">Beauty UGC</p>
+                  <p class="sub">Lipstick Color #104</p>
+                </div>
+              </div>
+            </div>
+          </button>
+        </div>
+
+        <!-- 2) GYM / WORKOUT -->
+        <div class="col-6 col-md-4">
+          <button class="w-100 border-0 bg-transparent p-0"
+            onclick="openVideo('assets/video/mov003.MP4','Gym & Workout')"
+            aria-label="Open gym video">
+            <div class="tile">
+              <div class="tile-inner">
+                <!-- COVER (optional): assets/img/gym-cover.jpg -->
+                <div class="tile-bg" style="background-image:url('assets/img/gym-cover.jpg');"></div>
+
+                <div class="tile-fallback">
+                  <div class="fallback-badge"><i class="bi bi-lightning-charge"></i> Gym &amp; Workout</div>
+                </div>
+
+                <div class="tile-play">
+                  <div class="play-circle"><div class="play-triangle"></div></div>
+                </div>
+                <div class="tile-overlay"></div>
+                <div class="tile-caption">
+                  <p class="kicker">Gym &amp; Wellness</p>
+                  <p class="sub">Gym &amp; Workout</p>
+                </div>
+              </div>
+            </div>
+          </button>
+        </div>
+
+        <!-- 3) TRAVEL UGC (mov001.mov) -->
+        <div class="col-6 col-md-4">
+          <button class="w-100 border-0 bg-transparent p-0"
+            onclick="openVideo('assets/video/mov001.mov','Travel UGC')"
+            aria-label="Open travel video">
+            <div class="tile">
+              <div class="tile-inner">
+                <!-- COVER (optional): assets/img/travel-cover.jpg -->
+                <div class="tile-bg" style="background-image:url('assets/img/travel-cover.jpg');"></div>
+
+                <div class="tile-fallback">
+                  <div class="fallback-badge"><i class="bi bi-geo-alt"></i> Travel UGC</div>
+                </div>
+
+                <div class="tile-play">
+                  <div class="play-circle"><div class="play-triangle"></div></div>
+                </div>
+                <div class="tile-overlay"></div>
+                <div class="tile-caption">
+                  <p class="kicker">Travel UGC</p>
+                  <p class="sub">Destination / Stay</p>
+                </div>
+              </div>
+            </div>
+          </button>
+        </div>
+
+        <!-- 4) HOTEL (hotel.mp4) -->
+        <div class="col-6 col-md-4">
+          <button class="w-100 border-0 bg-transparent p-0"
+            onclick="openVideo('assets/video/hotel.mp4','Hotel Stay')"
+            aria-label="Open hotel video">
+            <div class="tile">
+              <div class="tile-inner">
+                <!-- COVER (optional): assets/img/hotel-cover.jpg -->
+                <div class="tile-bg" style="background-image:url('assets/img/hotel-cover.jpg');"></div>
+
+                <div class="tile-fallback">
+                  <div class="fallback-badge"><i class="bi bi-building"></i> Hotel Stay</div>
+                </div>
+
+                <div class="tile-play">
+                  <div class="play-circle"><div class="play-triangle"></div></div>
+                </div>
+                <div class="tile-overlay"></div>
+                <div class="tile-caption">
+                  <p class="kicker">Travel UGC</p>
+                  <p class="sub">Hotel Stay</p>
+                </div>
+              </div>
+            </div>
+          </button>
+        </div>
+
+      </div>
+
+      <div class="text-center small muted mt-4 hint-line">
+        Your videos must be inside <code>assets/video/</code>: <code>kjlipstick.mp4</code>, <code>mov003.MP4</code>, <code>mov001.mov</code>, <code>hotel.mp4</code>.<br>
+        Covers are optional (but recommended): put images in <code>assets/img/</code> named <code>lipstick-cover.jpg</code>, <code>gym-cover.jpg</code>, <code>travel-cover.jpg</code>, <code>hotel-cover.jpg</code>.
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="section-pad section-cream">
+    <div class="container">
+      <div class="text-center mb-5">
+        <div class="hero-badge mb-2">Services</div>
+        <h2 class="font-heading display-5 fw-semibold mb-0">How I Can Support Your Brand</h2>
+      </div>
+
+      <div class="row g-3">
+        <div class="col-md-4">
+          <div class="glass-card p-4 text-center h-100">
+            <div style="font-size:1.9rem;">🎬</div>
+            <div class="fw-semibold mt-2">UGC Videos</div>
+            <div class="small muted">15–60 seconds</div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="glass-card p-4 text-center h-100">
+            <div style="font-size:1.9rem;">📱</div>
+            <div class="fw-semibold mt-2">TikTok &amp; Reels</div>
+            <div class="small muted">Native formats</div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="glass-card p-4 text-center h-100">
+            <div style="font-size:1.9rem;">📸</div>
+            <div class="fw-semibold mt-2">Product Photography</div>
+            <div class="small muted">Beauty &amp; lifestyle</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- STYLE -->
+  <section class="section-pad">
+    <div class="container">
+      <div class="text-center mb-5">
+        <div class="hero-badge mb-2">Aesthetic</div>
+        <h2 class="font-heading display-5 fw-semibold mb-0">Content Style &amp; Aesthetic</h2>
+      </div>
+
+      <div class="d-flex flex-wrap gap-3 justify-content-center">
+        <div class="chip"><span>☀️</span><span>Warm, natural lighting</span></div>
+        <div class="chip"><span>✨</span><span>Clean beauty &amp; soft glam</span></div>
+        <div class="chip"><span>🏋️</span><span>Fitness &amp; wellness</span></div>
+        <div class="chip"><span>🏨</span><span>Travel stays</span></div>
+        <div class="chip"><span>🇧🇷</span><span>Brazilian warmth + US tone</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section-pad" style="background: linear-gradient(180deg, var(--bg-cream) 0%, var(--bg-warm) 100%);">
+    <div class="container">
+      <div class="text-center mb-4">
+        <div class="hero-badge mb-2">Ready to Start?</div>
+        <h2 class="font-heading display-4 fw-semibold mb-3">Let’s Work Together</h2>
+        <p class="lead mb-0">Let’s create content your audience actually wants to watch.</p>
+      </div>
+
+      <div class="glass-card p-4 p-md-5 text-center mx-auto" style="max-width: 720px;">
+        <a class="btn btn-primary-custom btn-lg rounded-pill px-4 py-3"
+           href="mailto:bygsalviatti@gmail.com">
+          📩 bygsalviatti@gmail.com
+        </a>
+
+        <div class="mt-3 d-flex flex-wrap justify-content-center gap-3">
+          <a class="social-link" href="https://www.instagram.com/bygsalviatti/" target="_blank" rel="noopener">
+            <span class="social-ico" aria-hidden="true"><i class="bi bi-instagram"></i></span>
+            <strong>@bygsalviatti</strong>
+          </a>
+
+          <a class="social-link" href="https://www.tiktok.com/@bygsalviatti?_r=1&_t=ZS-93cjAlDcI8Q" target="_blank" rel="noopener">
+            <span class="social-ico" aria-hidden="true"><i class="bi bi-tiktok"></i></span>
+            <strong>@bygsalviatti</strong>
+          </a>
+        </div>
+
+        <div class="small mt-3" style="color: var(--accent-sage);">
+          Available for US-based collaborations • UGC &amp; paid usage
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-4 text-center section-cream">
+    <div class="container">
+      <div class="small muted mb-2">Beauty • Lifestyle • Wellness • Travel</div>
+      <div class="small" style="opacity:.5;">© 2026 Gabriela Salviatti. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <!-- VIDEO MODAL -->
+  <div class="modal fade" id="videoModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 560px;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h6 class="modal-title" id="videoModalTitle">Video</h6>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="stopVideo()"></button>
+        </div>
+        <div class="modal-body p-0 video-wrap">
+          <video id="videoPlayer" controls playsinline></video>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // Smooth scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', (e) => {
+        const targetId = a.getAttribute('href');
+        if (!targetId || targetId === '#') return;
+        const target = document.querySelector(targetId);
+        if (!target) return;
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    // Video modal controls
+    const videoModalEl = document.getElementById('videoModal');
+    const videoPlayer = document.getElementById('videoPlayer');
+    const videoTitle = document.getElementById('videoModalTitle');
+    const bsModal = new bootstrap.Modal(videoModalEl);
+
+    function openVideo(src, title) {
+      videoTitle.textContent = title || 'Video';
+      videoPlayer.src = src;
+      videoPlayer.load();
+      bsModal.show();
+      videoPlayer.play().catch(() => {});
+    }
+
+    function stopVideo() {
+      videoPlayer.pause();
+      videoPlayer.removeAttribute('src');
+      videoPlayer.load();
+    }
+
+    videoModalEl.addEventListener('hidden.bs.modal', stopVideo);
+  </script>
+</body>
+</html>
+
+
