@@ -254,8 +254,41 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      max-width: 18rem;
+      max-width: 100%;
     }
+
+    /* NEW: Reels / TikTok badges */
+    .tile-badges{
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      display: flex;
+      gap: 8px;
+      z-index: 5;
+    }
+    .tile-badge{
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .01em;
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(0,0,0,0.35);
+      backdrop-filter: blur(6px);
+      box-shadow: 0 10px 18px rgba(0,0,0,0.10);
+      user-select: none;
+    }
+    .badge-reels{
+      background: linear-gradient(135deg, var(--ig-3) 0%, var(--ig-4) 45%, var(--ig-5) 100%);
+    }
+    .badge-tiktok{
+      background: linear-gradient(135deg, #111 0%, #000 100%);
+    }
+    .tile-badge i{ font-size: 1rem; }
 
     /* Modal video */
     .modal-content { border-radius: 1rem; overflow: hidden; }
@@ -265,6 +298,19 @@
     /* Image modal */
     .img-wrap { background:#000; }
     .img-wrap img{ width:100%; height:auto; display:block; }
+
+    /* Chips (used in Aesthetic section) */
+    .chip{
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      padding: 12px 16px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.75);
+      border: 1px solid rgba(0,0,0,0.06);
+      box-shadow: 0 10px 22px rgba(45, 42, 38, 0.08);
+      font-weight: 600;
+    }
 
     /* Tiny helper line */
     .hint-line{ font-size: .9rem; opacity: .7; }
@@ -353,13 +399,13 @@
         <div class="col-lg-6">
           <div class="hero-art">
             <img
-              src="assets/hero.jpg"
+              src="img/hero.jpg"
               alt="Gabriela Salviatti - UGC Creator"
               onerror="this.style.display='none';"
             />
           </div>
           <div class="small text-center text-lg-start mt-2 muted hint-line">
-            (Optional) If you want a hero photo later, put it at <code>assets/hero.jpg</code>
+            (Optional) Put your hero image at <code>img/hero.jpg</code>
           </div>
         </div>
 
@@ -379,7 +425,7 @@
         <div class="row g-4 align-items-center">
           <div class="col-md-4 text-center text-md-start">
             <img
-              src="assets/gabi.png"
+              src="img/gabi.png"
               class="img-fluid shadow-sm"
               style="
                 width: 100%;
@@ -431,11 +477,17 @@
         <!-- 1) LIPSTICK (VIDEO) -->
         <div class="col-6 col-md-4">
           <button class="w-100 border-0 bg-transparent p-0"
-            onclick="openVideo(asset('assets/video/kjlipstick.mp4'),'Kylie Jenner | Lipstick #104')"
+            onclick="openVideo(asset('video/kjlipstick.mp4'),'Kylie Jenner | Lipstick #104')"
             aria-label="Open lipstick video">
             <div class="tile">
               <div class="tile-inner">
-                <div class="tile-bg" style="background-image:url('assets/img/kj.jpg');"></div>
+                <div class="tile-bg" style="background-image:url('img/kj.jpg');"></div>
+
+                <!-- Badges -->
+                <div class="tile-badges">
+                  <span class="tile-badge badge-reels"><i class="bi bi-instagram"></i> Reels</span>
+                  <span class="tile-badge badge-tiktok"><i class="bi bi-tiktok"></i> TikTok</span>
+                </div>
 
                 <div class="tile-play">
                   <div class="play-circle"><div class="play-triangle"></div></div>
@@ -458,11 +510,17 @@
         <!-- 2) GYM / WORKOUT (VIDEO) -->
         <div class="col-6 col-md-4">
           <button class="w-100 border-0 bg-transparent p-0"
-            onclick="openVideo(asset('assets/video/mov003.MP4'),'Gym & Workout')"
+            onclick="openVideo(asset('video/mov003.mp4'),'Gym & Workout')"
             aria-label="Open gym video">
             <div class="tile">
               <div class="tile-inner">
-                <div class="tile-bg" style="background-image:url('assets/img/gym-cover.jpg');"></div>
+                <div class="tile-bg" style="background-image:url('img/gym-cover.jpg');"></div>
+
+                <!-- Badges -->
+                <div class="tile-badges">
+                  <span class="tile-badge badge-reels"><i class="bi bi-instagram"></i> Reels</span>
+                  <span class="tile-badge badge-tiktok"><i class="bi bi-tiktok"></i> TikTok</span>
+                </div>
 
                 <div class="tile-play">
                   <div class="play-circle"><div class="play-triangle"></div></div>
@@ -485,12 +543,17 @@
         <!-- 3) CONRAD (HILTON) NASHVILLE (VIDEO) -->
         <div class="col-6 col-md-4">
           <button class="w-100 border-0 bg-transparent p-0"
-            onclick="openVideo(asset('assets/video/hotel1'),'Conrad (Hilton) Nashville')"
+            onclick="openVideo(asset('video/hotel1.mp4'),'Conrad (Hilton) • Nashville, TN')"
             aria-label="Open Conrad Nashville video">
             <div class="tile">
               <div class="tile-inner">
-                <!-- ✅ Requested: conrad-nashville.jpg as cover -->
-                <div class="tile-bg" style="background-image:url('assets/img/conrad-nashville.jpg');"></div>
+                <div class="tile-bg" style="background-image:url('img/conrad-nashville.jpg');"></div>
+
+                <!-- Badges -->
+                <div class="tile-badges">
+                  <span class="tile-badge badge-reels"><i class="bi bi-instagram"></i> Reels</span>
+                  <span class="tile-badge badge-tiktok"><i class="bi bi-tiktok"></i> TikTok</span>
+                </div>
 
                 <div class="tile-play">
                   <div class="play-circle"><div class="play-triangle"></div></div>
@@ -513,12 +576,17 @@
         <!-- 4) HOTEL (VIDEO) -->
         <div class="col-6 col-md-4">
           <button class="w-100 border-0 bg-transparent p-0"
-            onclick="openVideo(asset('assets/video/hotel1.mp4'),'Hotel Stay')"
+            onclick="openVideo(asset('video/hotel1.mp4'),'Hotel Stay • Room Tour')"
             aria-label="Open hotel video">
             <div class="tile">
               <div class="tile-inner">
-                <!-- If this is also Conrad footage, keep the same cover -->
-                <div class="tile-bg" style="background-image:url('assets/img/conrad-nashville.jpg');"></div>
+                <div class="tile-bg" style="background-image:url('img/conrad-nashville.jpg');"></div>
+
+                <!-- Badges -->
+                <div class="tile-badges">
+                  <span class="tile-badge badge-reels"><i class="bi bi-instagram"></i> Reels</span>
+                  <span class="tile-badge badge-tiktok"><i class="bi bi-tiktok"></i> TikTok</span>
+                </div>
 
                 <div class="tile-play">
                   <div class="play-circle"><div class="play-triangle"></div></div>
@@ -541,12 +609,17 @@
         <!-- 5) OAKBERRY (PHOTO EXAMPLE) -->
         <div class="col-6 col-md-4">
           <button class="w-100 border-0 bg-transparent p-0"
-            onclick="openImage(asset('assets/img/oakberry.jpg'),'Oakberry • UGC Photo')"
+            onclick="openImage(asset('img/oakberry.jpg'),'Oakberry • UGC Photo')"
             aria-label="Open Oakberry photo">
             <div class="tile">
               <div class="tile-inner">
-                <!-- ✅ Requested: oakberry.jpg as example photo work -->
-                <div class="tile-bg" style="background-image:url('assets/img/oakberry.jpg');"></div>
+                <div class="tile-bg" style="background-image:url('img/oakberry.jpg');"></div>
+
+                <!-- Badges (photo can still be used on Reels/TikTok as cover) -->
+                <div class="tile-badges">
+                  <span class="tile-badge badge-reels"><i class="bi bi-instagram"></i> Reels</span>
+                  <span class="tile-badge badge-tiktok"><i class="bi bi-tiktok"></i> TikTok</span>
+                </div>
 
                 <!-- Photo icon instead of play -->
                 <div class="tile-play">
@@ -573,7 +646,7 @@
       </div>
 
       <div class="text-center small muted mt-4 hint-line">
-        Tip: for best playback on all browsers, convert <code>.mov</code> to <code>.mp4</code> (H.264 + AAC).
+        Tip: for best playback on all browsers, use <code>.mp4</code> (H.264 video + AAC audio).
       </div>
     </div>
   </section>
@@ -778,3 +851,4 @@
   </script>
 </body>
 </html>
+
