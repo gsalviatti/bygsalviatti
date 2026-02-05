@@ -161,11 +161,11 @@
       box-shadow: var(--shadow-soft);
     }
 
-    /* Instagram gradient “contour/border” */
+    /* Instagram gradient border */
     .tile::before{
       content:"";
       position:absolute;
-      inset: -2px;               /* border thickness */
+      inset: -2px;
       border-radius: 1.35rem;
       background: conic-gradient(from 180deg,
         var(--ig-1), var(--ig-2), var(--ig-3), var(--ig-4), var(--ig-5), var(--ig-3), var(--ig-2), var(--ig-1)
@@ -173,10 +173,9 @@
       filter: saturate(1.1);
     }
 
-    /* Inner container so the gradient stays as a border */
     .tile-inner{
       position:absolute;
-      inset: 2px;                /* matches border thickness above */
+      inset: 2px;
       border-radius: 1.15rem;
       overflow:hidden;
       background: linear-gradient(145deg, #E8DED4 0%, #D4C5B5 100%);
@@ -188,32 +187,12 @@
       background-size: cover;
       background-position: center;
       transform: scale(1.02);
-      opacity: 1;
     }
+
     .tile-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,.60) 0%, rgba(0,0,0,0) 55%);
-    }
-
-    /* If a cover image is missing, we still show a clean fallback */
-    .tile-fallback{
-      position:absolute;
-      inset:0;
-      display:grid;
-      place-items:center;
-      background: linear-gradient(135deg, rgba(255,255,255,0.25), rgba(0,0,0,0.05));
-    }
-    .fallback-badge{
-      display:inline-flex;
-      align-items:center;
-      gap:.6rem;
-      padding:.7rem 1rem;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.85);
-      border: 1px solid rgba(0,0,0,0.06);
-      box-shadow: 0 10px 24px rgba(0,0,0,0.12);
-      font-weight: 600;
+      background: linear-gradient(to top, rgba(0,0,0,.62) 0%, rgba(0,0,0,0) 55%);
     }
 
     .tile-play {
@@ -240,38 +219,56 @@
       border-bottom: 9px solid transparent;
       margin-left: 3px;
     }
+
+    /* Instagram-style bottom text */
     .tile-caption {
       position: absolute;
       left: 0; right: 0; bottom: 0;
       padding: 14px 14px 12px;
       color: #fff;
     }
-    .tile-caption .kicker { font-size: .9rem; font-weight: 600; margin: 0; }
-    .tile-caption .sub { font-size: .8rem; opacity: .85; margin: 0; }
-
-    /* Small chips */
-    .chip {
+    .tile-caption .kicker { font-size: .9rem; font-weight: 700; margin: 0; }
+    .tile-caption .sub { font-size: .82rem; opacity: .88; margin: 0; }
+    .tile-caption .ig-meta{
+      margin-top: 6px;
       display: inline-flex;
       align-items: center;
-      gap: .5rem;
-      padding: .75rem 1rem;
+      gap: .55rem;
+      padding: 6px 10px;
       border-radius: 999px;
-      background: rgba(255,255,255,0.70);
-      border: 1px solid rgba(255,255,255,0.65);
+      background: rgba(0,0,0,0.38);
+      border: 1px solid rgba(255,255,255,0.15);
+      backdrop-filter: blur(6px);
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: .01em;
+      max-width: 100%;
     }
-    .chip span { font-weight: 600; font-size: .95rem; }
-    .muted { opacity: .7; }
+    .ig-dot{
+      width: 4px; height: 4px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.75);
+      flex: 0 0 auto;
+    }
+    .ig-text{
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 18rem;
+    }
 
     /* Modal video */
     .modal-content { border-radius: 1rem; overflow: hidden; }
     .video-wrap { background: #000; }
     video { width: 100%; height: auto; display: block; }
 
+    /* Image modal */
+    .img-wrap { background:#000; }
+    .img-wrap img{ width:100%; height:auto; display:block; }
+
     /* Tiny helper line */
-    .hint-line{
-      font-size: .9rem;
-      opacity: .7;
-    }
+    .hint-line{ font-size: .9rem; opacity: .7; }
+    .muted { opacity: .7; }
   </style>
 </head>
 
@@ -335,7 +332,6 @@
             </a>
           </div>
 
-          <!-- Socials -->
           <div class="mt-4 d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start align-items-center">
             <a class="text-decoration-none" href="mailto:bygsalviatti@gmail.com" style="color: var(--text-dark);">
               📩 <span class="text-decoration-underline">bygsalviatti@gmail.com</span>
@@ -398,9 +394,6 @@
               alt="Gabriela Salviatti"
               onerror="this.style.display='none';"
             />
-            <div class="small muted mt-2 hint-line">
-              (Optional) Profile image: <code>assets/img/gabi.png</code>
-            </div>
           </div>
 
           <div class="col-md-8">
@@ -424,120 +417,153 @@
     </div>
   </section>
 
-  <!-- WORK / PORTFOLIO (ONLY CONTENT YOU HAVE) -->
+  <!-- WORK -->
   <section id="work" class="section-pad">
     <div class="container">
       <div class="text-center mb-4">
         <div class="hero-badge mb-2">Portfolio</div>
         <h2 class="font-heading display-5 fw-semibold mb-2">Selected Work</h2>
-        <div class="muted">Tap to watch • Not Sponsored</div>
+        <div class="muted">Tap to watch / view</div>
       </div>
 
       <div class="row g-3 g-md-4 mt-2">
 
-        <!-- 1) LIPSTICK -->
+        <!-- 1) LIPSTICK (VIDEO) -->
         <div class="col-6 col-md-4">
           <button class="w-100 border-0 bg-transparent p-0"
-            onclick="openVideo('assets/video/kjlipstick.mp4','Lipstick Color #104')"
+            onclick="openVideo(asset('assets/video/kjlipstick.mp4'),'Kylie Jenner | Lipstick #104')"
             aria-label="Open lipstick video">
             <div class="tile">
               <div class="tile-inner">
-                <!-- COVER (optional): put a real image at assets/img/lipstick-cover.jpg -->
                 <div class="tile-bg" style="background-image:url('assets/img/kj.jpg');"></div>
-
-                <!-- If you don’t have a cover yet, this fallback badge still shows -->
-                <div class="tile-fallback">
-                  <div class="fallback-badge"><i class="bi bi-camera-video"></i> Lipstick #104</div>
-                </div>
 
                 <div class="tile-play">
                   <div class="play-circle"><div class="play-triangle"></div></div>
                 </div>
                 <div class="tile-overlay"></div>
+
                 <div class="tile-caption">
                   <p class="kicker">Beauty UGC</p>
-                  <p class="sub"> Kylie Jenner | Matte Lipstick | Color #104</p>
+                  <p class="sub">Kylie Jenner • Matte Lipstick • Color #104</p>
+                  <div class="ig-meta">
+                    <span>@bygsalviatti</span><span class="ig-dot"></span>
+                    <span class="ig-text">Kylie Jenner Lipstick #104</span>
+                  </div>
                 </div>
               </div>
             </div>
           </button>
         </div>
 
-        <!-- 2) GYM / WORKOUT -->
+        <!-- 2) GYM / WORKOUT (VIDEO) -->
         <div class="col-6 col-md-4">
           <button class="w-100 border-0 bg-transparent p-0"
-            onclick="openVideo('assets/video/mov003.MP4','Gym & Workout')"
+            onclick="openVideo(asset('assets/video/mov003.MP4'),'Gym & Workout')"
             aria-label="Open gym video">
             <div class="tile">
               <div class="tile-inner">
-                <!-- COVER (optional): assets/img/gym-cover.jpg -->
                 <div class="tile-bg" style="background-image:url('assets/img/gym-cover.jpg');"></div>
 
-                <div class="tile-fallback">
-                  <div class="fallback-badge"><i class="bi bi-lightning-charge"></i> Gym &amp; Workout</div>
-                </div>
-
                 <div class="tile-play">
                   <div class="play-circle"><div class="play-triangle"></div></div>
                 </div>
                 <div class="tile-overlay"></div>
+
                 <div class="tile-caption">
                   <p class="kicker">Gym &amp; Wellness</p>
-                  <p class="sub">Gym &amp; Workout</p>
+                  <p class="sub">Workout Routine</p>
+                  <div class="ig-meta">
+                    <span>@bygsalviatti</span><span class="ig-dot"></span>
+                    <span class="ig-text">Gym & Workout</span>
+                  </div>
                 </div>
               </div>
             </div>
           </button>
         </div>
 
-        <!-- 3) TRAVEL UGC (mov001.mov) -->
+        <!-- 3) CONRAD (HILTON) NASHVILLE (VIDEO) -->
         <div class="col-6 col-md-4">
           <button class="w-100 border-0 bg-transparent p-0"
-            onclick="openVideo('assets/video/mov001.mov','Travel UGC')"
-            aria-label="Open travel video">
+            onclick="openVideo(asset('assets/video/mov001.mov'),'Conrad (Hilton) Nashville')"
+            aria-label="Open Conrad Nashville video">
             <div class="tile">
               <div class="tile-inner">
-                <!-- COVER (optional): assets/img/travel-cover.jpg -->
+                <!-- ✅ Requested: conrad-nashville.jpg as cover -->
                 <div class="tile-bg" style="background-image:url('assets/img/conrad-nashville.jpg');"></div>
-
-                <div class="tile-fallback">
-                  <div class="fallback-badge"><i class="bi bi-geo-alt"></i> Travel UGC</div>
-                </div>
 
                 <div class="tile-play">
                   <div class="play-circle"><div class="play-triangle"></div></div>
                 </div>
                 <div class="tile-overlay"></div>
+
                 <div class="tile-caption">
                   <p class="kicker">Travel UGC</p>
-                  <p class="sub">Destination / Stay</p>
+                  <p class="sub">Conrad (Hilton) • Nashville, TN</p>
+                  <div class="ig-meta">
+                    <span>@bygsalviatti</span><span class="ig-dot"></span>
+                    <span class="ig-text">Conrad Nashville, TN</span>
+                  </div>
                 </div>
               </div>
             </div>
           </button>
         </div>
 
-        <!-- 4) HOTEL (hotel.mp4) -->
+        <!-- 4) HOTEL (VIDEO) -->
         <div class="col-6 col-md-4">
           <button class="w-100 border-0 bg-transparent p-0"
-            onclick="openVideo('assets/video/hotel1.mp4','Hotel Stay')"
+            onclick="openVideo(asset('assets/video/hotel1.mp4'),'Hotel Stay')"
             aria-label="Open hotel video">
             <div class="tile">
               <div class="tile-inner">
-                <!-- COVER (optional): assets/img/hotel-cover.jpg -->
+                <!-- If this is also Conrad footage, keep the same cover -->
                 <div class="tile-bg" style="background-image:url('assets/img/conrad-nashville.jpg');"></div>
-
-                <div class="tile-fallback">
-                  <div class="fallback-badge"><i class="bi bi-building"></i> Hotel Stay</div>
-                </div>
 
                 <div class="tile-play">
                   <div class="play-circle"><div class="play-triangle"></div></div>
                 </div>
                 <div class="tile-overlay"></div>
+
                 <div class="tile-caption">
                   <p class="kicker">Travel UGC</p>
-                  <p class="sub">Hotel Stay</p>
+                  <p class="sub">Hotel Stay • Room Tour</p>
+                  <div class="ig-meta">
+                    <span>@bygsalviatti</span><span class="ig-dot"></span>
+                    <span class="ig-text">Hotel Room Tour</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </button>
+        </div>
+
+        <!-- 5) OAKBERRY (PHOTO EXAMPLE) -->
+        <div class="col-6 col-md-4">
+          <button class="w-100 border-0 bg-transparent p-0"
+            onclick="openImage(asset('assets/img/oakberry.jpg'),'Oakberry • UGC Photo')"
+            aria-label="Open Oakberry photo">
+            <div class="tile">
+              <div class="tile-inner">
+                <!-- ✅ Requested: oakberry.jpg as example photo work -->
+                <div class="tile-bg" style="background-image:url('assets/img/oakberry.jpg');"></div>
+
+                <!-- Photo icon instead of play -->
+                <div class="tile-play">
+                  <div class="play-circle" style="width:62px;height:62px;">
+                    <i class="bi bi-image" style="font-size:1.35rem;color:var(--accent-terracotta);"></i>
+                  </div>
+                </div>
+
+                <div class="tile-overlay"></div>
+
+                <div class="tile-caption">
+                  <p class="kicker">UGC Photo</p>
+                  <p class="sub">Oakberry • Product Photo</p>
+                  <div class="ig-meta">
+                    <span>@bygsalviatti</span><span class="ig-dot"></span>
+                    <span class="ig-text">Oakberry</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -547,8 +573,7 @@
       </div>
 
       <div class="text-center small muted mt-4 hint-line">
-        Your videos must be inside <code>assets/video/</code>: <code>kjlipstick.mp4</code>, <code>mov003.MP4</code>, <code>mov001.mov</code>, <code>hotel.mp4</code>.<br>
-        Covers are optional (but recommended): put images in <code>assets/img/</code> named <code>lipstick-cover.jpg</code>, <code>gym-cover.jpg</code>, <code>travel-cover.jpg</code>, <code>hotel-cover.jpg</code>.
+        Tip: for best playback on all browsers, convert <code>.mov</code> to <code>.mp4</code> (H.264 + AAC).
       </div>
     </div>
   </section>
@@ -657,7 +682,22 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="stopVideo()"></button>
         </div>
         <div class="modal-body p-0 video-wrap">
-          <video id="videoPlayer" controls playsinline></video>
+          <video id="videoPlayer" controls playsinline preload="metadata"></video>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- IMAGE MODAL -->
+  <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 560px;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h6 class="modal-title" id="imageModalTitle">Image</h6>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="stopImage()"></button>
+        </div>
+        <div class="modal-body p-0 img-wrap">
+          <img id="imageViewer" alt="Work image"/>
         </div>
       </div>
     </div>
@@ -667,6 +707,19 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
+    // Makes asset paths work on GitHub Pages (username.github.io/repo/)
+    const BASE_PATH = (() => {
+      const host = window.location.hostname;
+      const parts = window.location.pathname.split('/').filter(Boolean);
+      if (host.endsWith('github.io') && parts.length > 0) return '/' + parts[0] + '/';
+      return '/';
+    })();
+
+    function asset(relPath){
+      const clean = relPath.replace(/^\/+/, '');
+      return BASE_PATH + clean;
+    }
+
     // Smooth scrolling
     document.querySelectorAll('a[href^="#"]').forEach(a => {
       a.addEventListener('click', (e) => {
@@ -683,13 +736,17 @@
     const videoModalEl = document.getElementById('videoModal');
     const videoPlayer = document.getElementById('videoPlayer');
     const videoTitle = document.getElementById('videoModalTitle');
-    const bsModal = new bootstrap.Modal(videoModalEl);
+    const bsVideoModal = new bootstrap.Modal(videoModalEl);
 
     function openVideo(src, title) {
       videoTitle.textContent = title || 'Video';
+      videoPlayer.pause();
+      videoPlayer.removeAttribute('src');
+      videoPlayer.load();
+
       videoPlayer.src = src;
       videoPlayer.load();
-      bsModal.show();
+      bsVideoModal.show();
       videoPlayer.play().catch(() => {});
     }
 
@@ -700,8 +757,24 @@
     }
 
     videoModalEl.addEventListener('hidden.bs.modal', stopVideo);
+
+    // Image modal controls
+    const imageModalEl = document.getElementById('imageModal');
+    const imageViewer = document.getElementById('imageViewer');
+    const imageTitle = document.getElementById('imageModalTitle');
+    const bsImageModal = new bootstrap.Modal(imageModalEl);
+
+    function openImage(src, title){
+      imageTitle.textContent = title || 'Image';
+      imageViewer.src = src;
+      bsImageModal.show();
+    }
+
+    function stopImage(){
+      imageViewer.removeAttribute('src');
+    }
+
+    imageModalEl.addEventListener('hidden.bs.modal', stopImage);
   </script>
 </body>
 </html>
-
-
