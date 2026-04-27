@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>@bygsalviatti — Links & Carrosséis</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --forest: #0a1a0f;
+      --forest-mid: #122318;
+      --forest-light: #1a3322;
+      --gold: #c9a84c;
+      --gold-light: #e2c97a;
+      --gold-pale: #f5e9c4;
+      --cream: #faf6ee;
+      --white: #ffffff;
+      --text: #1a2e1e;
+      --muted: #6b7f6e;
+      --border: rgba(201,168,76,0.2);
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Outfit',sans-serif; background:#0a1a0f; color:#f5e9c4; overflow-x:hidden; }
+
+    /* ── NAV TABS ── */
+    .tab-nav {
+      position: fixed; top:0; left:0; right:0; z-index:100;
+      background: rgba(10,26,15,0.97); backdrop-filter:blur(16px);
+      border-bottom: 1px solid var(--border);
+      display:flex; justify-content:center; gap:4px; padding:14px 20px;
+    }
+    .tab-btn {
+      padding:8px 22px; border-radius:20px; border:1px solid var(--border);
+      background:transparent; color:#6b7f6e; font-family:'Outfit',sans-serif;
+      font-size:0.82rem; font-weight:500; cursor:pointer; transition:all 0.25s;
+    }
+    .tab-btn.active, .tab-btn:hover {
+      background: var(--gold); color: var(--forest); border-color: var(--gold); font-weight:600;
+    }
+
+    /* ── PAGES ── */
+    .page { display:none; min-height:100vh; padding-top:70px; }
+    .page.active { display:block; }
+
+    /* ══════════════════════════════════
+       LINKTREE PAGE
+    ══════════════════════════════════ */
+    .linktree-page {
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,168,76,0.08) 0%, transparent 60%),
+                  linear-gradient(180deg, #0a1a0f 0%, #0d1f13 100%);
+      display:flex; align-items:center; justify-content:center;
+      flex-direction:column; padding:80px 20px 60px;
+    }
+
+    /* grain texture */
+    .linktree-page::before {
+      content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity:0.4;
+    }
+
+    .lt-inner { position:relative; z-index:1; width:100%; max-width:420px; }
+
+    /* profile */
+    .lt-avatar {
+      width:88px; height:88px; border-radius:50%; margin:0 auto 16px;
+      background: linear-gradient(135deg, var(--forest-light), var(--forest-mid));
+      border:2px solid var(--gold);
+      box-shadow: 0 0 40px rgba(201,168,76,0.2);
+      display:flex; align-items:center; justify-content:center;
+      font-family:'Cormorant Garamond',serif; font-size:2rem; color:var(--gold);
+    }
+    .lt-name {
+      font-family:'Cormorant Garamond',serif; font-size:1.6rem;
+      color:var(--gold-pale); text-align:center; margin-bottom:4px;
+    }
+    .lt-handle { font-size:0.82rem; color:#6b7f6e; text-align:center; margin-bottom:6px; }
+    .lt-bio {
+      font-size:0.84rem; color:#8fa892; text-align:center;
+      line-height:1.65; margin-bottom:32px; max-width:320px; margin-left:auto; margin-right:auto;
+    }
+
+    /* divider */
+    .lt-divider {
+      display:flex; align-items:center; gap:12px; margin-bottom:24px;
+    }
+    .lt-divider::before, .lt-divider::after {
+      content:''; flex:1; height:1px; background:var(--border);
+    }
+    .lt-divider span { font-size:0.7rem; color:var(--gold); letter-spacing:0.15em; text-transform:uppercase; }
+
+    /* links */
+    .lt-link {
+      display:flex; align-items:center; gap:14px;
+      background: rgba(255,255,255,0.03);
+      border:1px solid var(--border);
+      border-radius:14px; padding:16px 20px;
+      text-decoration:none; margin-bottom:12px;
+      transition:all 0.25s; position:relative; overflow:hidden;
+    }
+    .lt-link::before {
+      content:''; position:absolute; inset:0;
+      background: linear-gradient(135deg, rgba(201,168,76,0.06), transparent);
+      opacity:0; transition:opacity 0.25s;
+    }
+    .lt-link:hover { border-color:var(--gold); transform:translateY(-2px); box-shadow:0 8px 30px rgba(201,168,76,0.12); }
+    .lt-link:hover::before { opacity:1; }
+    .lt-icon {
+      width:40px; height:40px; border-radius:10px; flex-shrink:0;
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.2rem;
+    }
+    .lt-icon.search { background:rgba(201,168,76,0.12); }
+    .lt-icon.pro { background:rgba(201,168,76,0.2); }
+    .lt-icon.alert { background:rgba(201,168,76,0.08); }
+    .lt-icon.tiktok { background:rgba(255,255,255,0.06); }
+    .lt-icon.ig { background:rgba(255,100,100,0.1); }
+    .lt-link-text { flex:1; }
+    .lt-link-label { font-size:0.75rem; color:var(--gold); font-weight:600; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:2px; }
+    .lt-link-title { font-size:0.93rem; color:var(--gold-pale); font-weight:500; }
+    .lt-link-sub { font-size:0.75rem; color:#6b7f6e; margin-top:1px; }
+    .lt-arrow { color:var(--gold); font-size:0.9rem; opacity:0.6; flex-shrink:0; }
+
+    /* featured link */
+    .lt-link.featured {
+      background: linear-gradient(135deg, rgba(201,168,76,0.12), rgba(201,168,76,0.04));
+      border-color:rgba(201,168,76,0.5);
+    }
+    .featured-tag {
+      position:absolute; top:10px; right:12px;
+      background:var(--gold); color:var(--forest);
+      font-size:0.62rem; font-weight:700; padding:2px 8px; border-radius:8px;
+      letter-spacing:0.08em; text-transform:uppercase;
+    }
+
+    /* social row */
+    .lt-social { display:flex; gap:10px; margin-top:8px; }
+    .lt-social-btn {
+      flex:1; display:flex; align-items:center; justify-content:center; gap:8px;
+      background:rgba(255,255,255,0.03); border:1px solid var(--border);
+      border-radius:10px; padding:12px; text-decoration:none;
+      font-size:0.8rem; color:#8fa892; transition:all 0.2s;
+    }
+    .lt-social-btn:hover { border-color:var(--gold); color:var(--gold-pale); }
+
+    /* footer */
+    .lt-footer { text-align:center; margin-top:28px; font-size:0.72rem; color:#3a4f3d; }
+
+
+    /* ══════════════════════════════════
+       CAROUSEL PAGES
+    ══════════════════════════════════ */
+    .carousel-page { background: var(--forest); padding:60px 20px 80px; }
+    .carousel-page-title {
+      font-family:'Cormorant Garamond',serif; font-size:1.6rem; color:var(--gold-pale);
+      text-align:center; margin-bottom:6px;
+    }
+    .carousel-page-sub { font-size:0.82rem; color:#6b7f6e; text-align:center; margin-bottom:40px; }
+
+    .carousel-scroller {
+      display:flex; gap:16px; overflow-x:auto; padding:0 20px 20px;
+      max-width:1200px; margin:0 auto;
+      scrollbar-width:thin; scrollbar-color:var(--gold) transparent;
+    }
+    .carousel-scroller::-webkit-scrollbar { height:4px; }
+    .carousel-scroller::-webkit-scrollbar-track { background:transparent; }
+    .carousel-scroller::-webkit-scrollbar-thumb { background:var(--gold); border-radius:2px; }
+
+    /* Individual slide */
+    .slide {
+      flex-shrink:0;
+      width:320px; height:400px;
+      border-radius:20px; overflow:hidden;
+      position:relative;
+      border:1px solid var(--border);
+      box-shadow:0 8px 40px rgba(0,0,0,0.4);
+    }
+
+    /* cover slide styles */
+    .slide-cover {
+      background: linear-gradient(150deg, #0d2218 0%, #122318 50%, #0a1a0f 100%);
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      padding:36px 28px; text-align:center;
+    }
+    .slide-cover::before {
+      content:''; position:absolute; inset:0;
+      background: radial-gradient(ellipse 80% 60% at 50% 30%, rgba(201,168,76,0.12), transparent);
+      pointer-events:none;
+    }
+    .slide-body {
+      background: linear-gradient(160deg, #0f1f14 0%, #0a1a0f 100%);
+      display:flex; flex-direction:column; padding:32px 28px;
+      position:relative;
+    }
+    .slide-body::before {
+      content:''; position:absolute; top:0; left:28px; right:28px; height:1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+
+    /* slide elements */
+    .slide-num {
+      font-family:'Cormorant Garamond',serif; font-size:4rem; font-weight:700;
+      color:rgba(201,168,76,0.12); line-height:1; position:absolute; top:16px; right:22px;
+    }
+    .slide-eyebrow {
+      font-size:0.65rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase;
+      color:var(--gold); margin-bottom:12px; position:relative; z-index:1;
+    }
+    .slide-title {
+      font-family:'Cormorant Garamond',serif; font-size:1.75rem; color:var(--gold-pale);
+      line-height:1.2; margin-bottom:14px; position:relative; z-index:1;
+    }
+    .slide-title em { color:var(--gold); font-style:italic; }
+    .slide-desc {
+      font-size:0.8rem; color:#8fa892; line-height:1.7;
+      position:relative; z-index:1; flex:1;
+    }
+    .slide-desc strong { color:var(--gold-pale); font-weight:600; }
+    .slide-icon-big {
+      font-size:3.5rem; margin-bottom:18px; position:relative; z-index:1;
+    }
+    .slide-divider {
+      width:32px; height:2px; background:var(--gold); border-radius:1px;
+      margin:14px 0; position:relative; z-index:1;
+    }
+    .slide-tag {
+      display:inline-block; background:rgba(201,168,76,0.12);
+      border:1px solid rgba(201,168,76,0.25); color:var(--gold);
+      font-size:0.68rem; font-weight:600; padding:3px 10px; border-radius:8px;
+      margin:3px 3px 3px 0; letter-spacing:0.05em;
+    }
+    .slide-cta {
+      margin-top:20px; background:var(--gold); color:var(--forest);
+      padding:11px 20px; border-radius:10px; font-weight:700;
+      font-size:0.82rem; text-decoration:none; display:inline-block;
+      text-align:center; transition:all 0.2s; position:relative; z-index:1;
+    }
+    .slide-cta:hover { background:var(--gold-light); color:var(--forest); }
+    .slide-cta-ghost {
+      margin-top:10px; border:1px solid var(--border); color:var(--gold);
+      padding:9px 20px; border-radius:10px; font-weight:500;
+      font-size:0.8rem; text-decoration:none; display:inline-block;
+      text-align:center; position:relative; z-index:1;
+    }
+
+    /* stat boxes inside slides */
+    .slide-stats { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:14px 0; position:relative; z-index:1; }
+    .slide-stat {
+      background:rgba(201,168,76,0.06); border:1px solid rgba(201,168,76,0.15);
+      border-radius:10px; padding:10px; text-align:center;
+    }
+    .slide-stat-num { font-family:'Cormorant Garamond',serif; font-size:1.6rem; color:var(--gold); line-height:1; }
+    .slide-stat-label { font-size:0.65rem; color:#6b7f6e; margin-top:2px; }
+
+    /* step list */
+    .slide-steps { list-style:none; margin:10px 0; position:relative; z-index:1; }
+    .slide-steps li {
+      display:flex; gap:10px; align-items:flex-start;
+      font-size:0.79rem; color:#8fa892; padding:6px 0;
+      border-bottom:1px solid rgba(201,168,76,0.06); line-height:1.5;
+    }
+    .slide-steps li:last-child { border-bottom:none; }
+    .step-circle {
+      width:20px; height:20px; border-radius:50%; flex-shrink:0;
+      background:rgba(201,168,76,0.12); border:1px solid rgba(201,168,76,0.3);
+      display:flex; align-items:center; justify-content:center;
+      font-size:0.65rem; color:var(--gold); font-weight:700; margin-top:1px;
+    }
+
+    /* bilingual badge */
+    .bilingual-badge {
+      display:flex; gap:6px; margin-bottom:14px; position:relative; z-index:1;
+    }
+    .lang-pill {
+      font-size:0.65rem; font-weight:700; padding:2px 8px; border-radius:8px;
+      letter-spacing:0.06em;
+    }
+    .lang-pt { background:rgba(0,156,59,0.15); color:#4ade80; border:1px solid rgba(0,156,59,0.2); }
+    .lang-en { background:rgba(59,130,246,0.12); color:#93c5fd; border:1px solid rgba(59,130,246,0.2); }
+
+    /* download hint */
+    .download-hint {
+      text-align:center; margin-top:16px;
+      font-size:0.75rem; color:#3a4f3d;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width:500px) {
+      .tab-btn { padding:7px 14px; font-size:0.75rem; }
+      .slide { width:280px; height:360px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TAB NAVIGATION -->
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="showPage('linktree', this)">🔗 Linktree</button>
+    <button class="tab-btn" onclick="showPage('carousel1', this)">✈️ 5 Coisas</button>
+    <button class="tab-btn" onclick="showPage('carousel2', this)">📚 Tutorial</button>
+    <button class="tab-btn" onclick="showPage('carousel3', this)">🔔 Alertas</button>
+  </div>
+
+
+  <!-- ══ LINKTREE PAGE ══ -->
+  <div class="page linktree-page active" id="page-linktree">
+    <div class="lt-inner">
+
+      <!-- Profile -->
+      <div class="lt-avatar">GS</div>
+      <div class="lt-name">Gabi Salviatti</div>
+      <div class="lt-handle">@bygsalviatti</div>
+      <div class="lt-bio">Brasileira nos EUA 🇧🇷🇺🇸 · Dicas de milhas, vistos e vida entre dois países · BI Developer · Criadora de conteúdo</div>
+
+      <!-- Seats.aero links -->
+      <div class="lt-divider"><span>✈️ Milhas & Viagem</span></div>
+
+      <a href="https://www.tkqlhce.com/click-101726045-17072392" target="_blank" class="lt-link featured">
+        <div class="featured-tag">⭐ Pro</div>
+        <div class="lt-icon pro">💎</div>
+        <div class="lt-link-text">
+          <div class="lt-link-label">Seats.aero</div>
+          <div class="lt-link-title">Assinar o Plano Pro</div>
+          <div class="lt-link-sub">1 ano de disponibilidade · $9.99/mês</div>
+        </div>
+        <div class="lt-arrow">→</div>
+      </a>
+
+      <a href="https://www.jdoqocy.com/click-101726045-17072391" target="_blank" class="lt-link">
+        <div class="lt-icon search">🔍</div>
+        <div class="lt-link-text">
+          <div class="lt-link-label">Seats.aero</div>
+          <div class="lt-link-title">Buscar voos com milhas</div>
+          <div class="lt-link-sub">Grátis · 20+ programas ao mesmo tempo</div>
+        </div>
+        <div class="lt-arrow">→</div>
+      </a>
+
+      <a href="https://www.tkqlhce.com/click-101726045-17072445" target="_blank" class="lt-link">
+        <div class="lt-icon alert">🔔</div>
+        <div class="lt-link-text">
+          <div class="lt-link-label">Seats.aero</div>
+          <div class="lt-link-title">Criar alerta de voo</div>
+          <div class="lt-link-sub">Receba aviso quando o assento aparecer</div>
+        </div>
+        <div class="lt-arrow">→</div>
+      </a>
+
+      <!-- Social -->
+      <div class="lt-divider" style="margin-top:20px;"><span>Redes sociais</span></div>
+
+      <div class="lt-social">
+        <a href="https://tiktok.com/@bygsalviatti" target="_blank" class="lt-social-btn">
+          <span>🎵</span> TikTok
+        </a>
+        <a href="https://instagram.com/bygsalviatti" target="_blank" class="lt-social-btn">
+          <span>📸</span> Instagram
+        </a>
+        <a href="https://linkedin.com/in/gabrielasalviatti" target="_blank" class="lt-social-btn">
+          <span>💼</span> LinkedIn
+        </a>
+      </div>
+
+      <div class="lt-footer">bygsalviatti · links atualizados em 2026</div>
+    </div>
+  </div>
+
+
+  <!-- ══ CAROUSEL 1 — "5 Coisas que o Seats.aero faz" ══ -->
+  <div class="page carousel-page" id="page-carousel1">
+    <div class="carousel-page-title">Carrossel 1 — "5 Coisas"</div>
+    <div class="carousel-page-sub">Arraste para ver todos os slides → Salve cada um como imagem</div>
+
+    <div class="carousel-scroller">
+
+      <!-- Slide 1: Cover -->
+      <div class="slide slide-cover">
+        <div class="slide-num">5</div>
+        <div class="slide-icon-big">✈️</div>
+        <div class="slide-eyebrow">Seats.aero</div>
+        <div class="slide-title">5 coisas que ele faz que você <em>não sabia</em></div>
+        <div class="slide-divider"></div>
+        <div class="bilingual-badge" style="justify-content:center;">
+          <span class="lang-pill lang-pt">PT</span>
+          <span class="lang-pill lang-en">EN</span>
+        </div>
+        <div class="slide-desc" style="font-size:0.75rem;">O buscador de milhas que americanos usam — e brasileiros precisam conhecer</div>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="slide slide-body">
+        <div class="slide-num">1</div>
+        <div class="slide-eyebrow">Feature #1</div>
+        <div class="slide-title">Busca em <em>20+ programas</em> ao mesmo tempo</div>
+        <div class="slide-divider"></div>
+        <div class="slide-desc">
+          <strong>PT:</strong> Chega de abrir um site por vez. Uma busca mostra todos os programas com disponibilidade — Aeroplan, Flying Blue, AAdvantage e mais.<br><br>
+          <strong>EN:</strong> Stop searching one program at a time. One search shows all available programs at once — in seconds.
+        </div>
+        <div class="slide-tag">20+ programas</div>
+        <div class="slide-tag">Resultado em segundos</div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="slide slide-body">
+        <div class="slide-num">2</div>
+        <div class="slide-eyebrow">Feature #2</div>
+        <div class="slide-title">Te avisa quando o <em>voo aparecer</em></div>
+        <div class="slide-divider"></div>
+        <div class="slide-desc">
+          <strong>PT:</strong> Cria um alerta gratuito. Quando o assento que você quer aparecer, você recebe email na hora.<br><br>
+          <strong>EN:</strong> Set a free alert. When your seat becomes available, you get an email instantly. Pro users also get SMS.
+        </div>
+        <div class="slide-tag">Alerta gratuito</div>
+        <div class="slide-tag">Email + SMS (Pro)</div>
+      </div>
+
+      <!-- Slide 4 -->
+      <div class="slide slide-body">
+        <div class="slide-num">3</div>
+        <div class="slide-eyebrow">Feature #3</div>
+        <div class="slide-title">Mostra quanto <em>cada programa</em> cobra</div>
+        <div class="slide-divider"></div>
+        <div class="slide-desc">
+          <strong>PT:</strong> Mesma rota, programas diferentes, preços diferentes em milhas. Você compara e escolhe o melhor antes de transferir qualquer ponto.<br><br>
+          <strong>EN:</strong> Same flight, different programs, different mile prices. Compare and choose before moving any points.
+        </div>
+        <div class="slide-tag">Comparação de preços</div>
+        <div class="slide-tag">Sem risco de perder milha</div>
+      </div>
+
+      <!-- Slide 5 -->
+      <div class="slide slide-body">
+        <div class="slide-num">4</div>
+        <div class="slide-eyebrow">Feature #4</div>
+        <div class="slide-title">Rota <em>GRU → JFK</em> e muito mais</div>
+        <div class="slide-divider"></div>
+        <div class="slide-desc">
+          <strong>PT:</strong> Brasileiros que viajam pros EUA: a rota São Paulo–Nova York está no Seats.aero. Busque com milhas e economize até R$8.000 numa business class.<br><br>
+          <strong>EN:</strong> São Paulo to New York, Miami, LA — all searchable. Find business class availability and save thousands.
+        </div>
+        <div class="slide-tag">GRU → JFK</div>
+        <div class="slide-tag">Business Class</div>
+      </div>
+
+      <!-- Slide 6 -->
+      <div class="slide slide-body">
+        <div class="slide-num">5</div>
+        <div class="slide-eyebrow">Feature #5</div>
+        <div class="slide-title">Tem versão <em>100% grátis</em></div>
+        <div class="slide-divider"></div>
+        <div class="slide-stats">
+          <div class="slide-stat"><div class="slide-stat-num">Free</div><div class="slide-stat-label">60 dias de disponibilidade</div></div>
+          <div class="slide-stat"><div class="slide-stat-num">Pro</div><div class="slide-stat-label">1 ano + alertas avançados</div></div>
+        </div>
+        <div class="slide-desc">
+          <strong>PT:</strong> Começa grátis hoje.<br>
+          <strong>EN:</strong> Start for free, upgrade when ready.<br><br>
+          Pro = $9.99/mês ou $99.99/ano
+        </div>
+      </div>
+
+      <!-- Slide 7: CTA -->
+      <div class="slide slide-cover">
+        <div class="slide-icon-big">💎</div>
+        <div class="slide-eyebrow">Link na bio</div>
+        <div class="slide-title">Testa <em>grátis</em> agora</div>
+        <div class="slide-divider"></div>
+        <div class="slide-desc" style="margin-bottom:20px;">Clica no link da bio para buscar seu primeiro voo com milhas · Click the link in bio to search your first award flight</div>
+        <a href="https://www.jdoqocy.com/click-101726045-17072391" target="_blank" class="slide-cta">🔍 Buscar agora · Search now</a>
+        <a href="https://www.tkqlhce.com/click-101726045-17072392" target="_blank" class="slide-cta-ghost">⭐ Ver plano Pro</a>
+      </div>
+
+    </div>
+    <div class="download-hint">💡 Dica: tire print de cada slide individualmente para postar no Instagram</div>
+  </div>
+
+
+  <!-- ══ CAROUSEL 2 — Tutorial "Como usar em 4 passos" ══ -->
+  <div class="page carousel-page" id="page-carousel2">
+    <div class="carousel-page-title">Carrossel 2 — Tutorial</div>
+    <div class="carousel-page-sub">"Como usar o Seats.aero" · Arraste para ver todos os slides</div>
+
+    <div class="carousel-scroller">
+
+      <!-- Cover -->
+      <div class="slide slide-cover">
+        <div class="slide-icon-big">🗺️</div>
+        <div class="slide-eyebrow">Guia Completo · Complete Guide</div>
+        <div class="slide-title">Como usar o Seats.aero em <em>4 passos</em></div>
+        <div class="slide-divider"></div>
+        <div class="bilingual-badge" style="justify-content:center;">
+          <span class="lang-pill lang-pt">PT</span>
+          <span class="lang-pill lang-en">EN</span>
+        </div>
+        <div class="slide-desc" style="font-size:0.75rem;">O erro que todo mundo comete · The mistake everyone makes: transferir milhas sem confirmar disponibilidade primeiro</div>
+      </div>
+
+      <!-- Step 1 -->
+      <div class="slide slide-body">
+        <div class="slide-eyebrow">Passo 1 · Step 1</div>
+        <div class="slide-title">Entre no <em>Seats.aero</em></div>
+        <div class="slide-divider"></div>
+        <div class="slide-desc" style="margin-bottom:16px;">
+          <strong>PT:</strong> Acessa o site pelo link na bio. A versão gratuita já funciona muito bem para começar.<br><br>
+          <strong>EN:</strong> Go to Seats.aero via the link in bio. The free version works great to get started.
+        </div>
+        <ul class="slide-steps">
+          <li><div class="step-circle">✓</div>Sem precisar criar conta para buscar · No account needed to search</li>
+          <li><div class="step-circle">✓</div>Interface em inglês, mas simples de usar · Simple interface</li>
+        </ul>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="slide slide-body">
+        <div class="slide-eyebrow">Passo 2 · Step 2</div>
+        <div class="slide-title">Coloque <em>origem e destino</em></div>
+        <div class="slide-divider"></div>
+        <div class="slide-desc" style="margin-bottom:16px;">
+          <strong>PT:</strong> Digite o código do aeroporto. GRU = Guarulhos, JFK = Nova York, MIA = Miami.<br><br>
+          <strong>EN:</strong> Type the airport code. GRU = São Paulo, JFK = New York, MIA = Miami.
+        </div>
+        <ul class="slide-steps">
+          <li><div class="step-circle">1</div>Origin: GRU (ou qualquer aeroporto)</li>
+          <li><div class="step-circle">2</div>Destination: JFK, MIA, LAX...</li>
+          <li><div class="step-circle">3</div>Escolha a classe: Economy, Business, First</li>
+        </ul>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="slide slide-body">
+        <div class="slide-eyebrow">Passo 3 · Step 3</div>
+        <div class="slide-title">Veja os <em>resultados</em></div>
+        <div class="slide-divider"></div>
+        <div class="slide-desc" style="margin-bottom:14px;">
+          <strong>PT:</strong> O site mostra todos os programas com disponibilidade, quantas milhas cada um cobra e as datas disponíveis.<br><br>
+          <strong>EN:</strong> See all programs with availability, how many miles each charges, and available dates.
+        </div>
+        <div class="slide-stats">
+          <div class="slide-stat"><div class="slide-stat-num">20+</div><div class="slide-stat-label">Programas comparados</div></div>
+          <div class="slide-stat"><div class="slide-stat-num">&lt;5s</div><div class="slide-stat-label">Tempo de resultado</div></div>
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="slide slide-body">
+        <div class="slide-eyebrow">Passo 4 · Step 4</div>
+        <div class="slide-title">Transfira milhas <em>só depois</em></div>
+        <div class="slide-divider"></div>
+        <div class="slide-desc" style="margin-bottom:16px;">
+          <strong>PT:</strong> Esse é o segredo. Você confirma que o assento existe ANTES de transferir seus pontos. Assim você não perde milha.<br><br>
+          <strong>EN:</strong> This is the key. Confirm availability FIRST, then transfer points. Never lose miles again.
+        </div>
+        <ul class="slide-steps">
+          <li><div class="step-circle">!</div><strong style="color:#f5e9c4;">NUNCA transfira antes de confirmar · NEVER transfer before confirming</strong></li>
+        </ul>
+        <div class="slide-tag" style="margin-top:12px;">✅ Assento confirmado</div>
+        <div class="slide-tag">💳 Milhas transferidas</div>
+        <div class="slide-tag">✈️ Voo reservado</div>
+      </div>
+
+      <!-- Bônus: Alertas -->
+      <div class="slide slide-body">
+        <div class="slide-eyebrow">Bônus · Bonus</div>
+        <div class="slide-title">Crie um <em>alerta</em> e espere</div>
+        <div class="slide-divider"></div>
+        <div class="slide-desc" style="margin-bottom:16px;">
+          <strong>PT:</strong> Se o voo que você quer não tiver disponível, cria um alerta gratuito. Quando aparecer, você recebe email automaticamente.<br><br>
+          <strong>EN:</strong> If your flight isn't available, set a free alert. When it shows up, you get an automatic email.
+        </div>
+        <a href="https://www.tkqlhce.com/click-101726045-17072445" target="_blank" class="slide-cta">🔔 Criar alerta grátis · Set free alert</a>
+      </div>
+
+      <!-- CTA -->
+      <div class="slide slide-cover">
+        <div class="slide-icon-big">🏆</div>
+        <div class="slide-eyebrow">Pronto! · You're ready!</div>
+        <div class="slide-title">Agora vai lá <em>testar</em></div>
+        <div class="slide-divider"></div>
+        <div class="slide-desc" style="margin-bottom:20px;">Salva esse carrossel para lembrar os passos · Save this carousel to remember the steps</div>
+        <a href="https://www.jdoqocy.com/click-101726045-17072391" target="_blank" class="slide-cta">🔍 Buscar agora · Search now</a>
+        <a href="https://www.tkqlhce.com/click-101726045-17072392" target="_blank" class="slide-cta-ghost">⭐ Upgrade to Pro</a>
+      </div>
+
+    </div>
+    <div class="download-hint">💡 Dica: tire print de cada slide individualmente para postar no Instagram</div>
+  </div>
+
+
+  <!-- ══ CAROUSEL 3 — Alertas ══ -->
+  <div class="page carousel-page" id="page-carousel3">
+    <div class="carousel-page-title">Carrossel 3 — Alertas</div>
+    <div class="carousel-page-sub">"Receba aviso quando o voo aparecer" · Arraste para ver todos os slides</div>
+
+    <div class="carousel-scroller">
+
+      <!-- Cover -->
+      <div class="slide slide-cover">
+        <div class="slide-icon-big">🔔</div>
+        <div class="slide-eyebrow">Seats.aero Alerts</div>
+        <div class="slide-title">Receba aviso quando o <em>voo aparecer</em></div>
+        <div class="slide-divider"></div>
+        <div class="bilingual-badge" style="justify-content:center;">
+          <span class="lang-pill lang-pt">PT</span>
+          <span class="lang-pill lang-en">EN</span>
+        </div>
+        <div class="slide-desc" style="font-size:0.75rem;">Para de ficar checando todo dia · Stop checking every single day</div>
+      </div>
+
+      <!-- O problema -->
+      <div class="slide slide-body">
+        <div class="slide-eyebrow">O problema · The problem</div>
+        <div class="slide-title">Assento em <em>business class</em> some rápido</div>
+        <div class="slide-divider"></div>
+        <div class="slide-desc">
+          <strong>PT:</strong> Assentos em business class com milhas aparecem e somem em horas. Checar manualmente todo dia é impossível.<br><br>
+          <strong>EN:</strong> Business class award seats appear and disappear in hours. Manually checking every day is impossible.<br><br>
+          <span style="color:var(--gold);">A solução: alertas automáticos.</span>
+        </div>
+      </div>
+
+      <!-- Como funciona -->
+      <div class="slide slide-body">
+        <div class="slide-eyebrow">Como funciona · How it works</div>
+        <div class="slide-title">Configure em <em>2 minutos</em></div>
+        <div class="slide-divider"></div>
+        <ul class="slide-steps">
+          <li><div class="step-circle">1</div>Escolha o programa de milhas · Choose your miles program</li>
+          <li><div class="step-circle">2</div>Coloque origem e destino · Set origin and destination</li>
+          <li><div class="step-circle">3</div>Escolha a data ou intervalo · Pick date or date range</li>
+          <li><div class="step-circle">4</div>Selecione a classe · Select cabin class</li>
+          <li><div class="step-circle">✓</div>Receba email quando aparecer · Get email when available</li>
+        </ul>
+      </div>
+
+      <!-- Free vs Pro -->
+      <div class="slide slide-body">
+        <div class="slide-eyebrow">Free vs Pro</div>
+        <div class="slide-title">O que cada plano <em>inclui</em></div>
+        <div class="slide-divider"></div>
+        <div class="slide-stats">
+          <div class="slide-stat">
+            <div class="slide-stat-num" style="font-size:1.1rem;">Free</div>
+            <div class="slide-stat-label">Email alerts · Data específica · 60 dias</div>
+          </div>
+          <div class="slide-stat" style="background:rgba(201,168,76,0.1); border-color:rgba(201,168,76,0.3);">
+            <div class="slide-stat-num" style="font-size:1.1rem; color:var(--gold);">Pro ⭐</div>
+            <div class="slide-stat-label">Email + SMS · Qualquer data · 1 ano · Nonstop filter</div>
+          </div>
+        </div>
+        <div class="slide-desc" style="margin-top:14px;">
+          <strong>PT:</strong> O Pro vale $9.99/mês — uma business class economizada já paga anos de assinatura.<br>
+          <strong>EN:</strong> Pro is $9.99/mo — one saved business class pays for years of subscription.
+        </div>
+      </div>
+
+      <!-- Dica -->
+      <div class="slide slide-body">
+        <div class="slide-eyebrow">💡 Dica pro · Pro tip</div>
+        <div class="slide-title">Configure <em>múltiplos</em> alertas</div>
+        <div class="slide-divider"></div>
+        <div class="slide-desc" style="margin-bottom:16px;">
+          <strong>PT:</strong> Não tem limite de alertas. Cria um pra cada rota que você quer fazer e deixa o Seats.aero trabalhar por você.<br><br>
+          <strong>EN:</strong> There's no limit on alerts. Set one for every route you want and let Seats.aero do the work.
+        </div>
+        <div class="slide-tag">GRU → JFK</div>
+        <div class="slide-tag">GRU → MIA</div>
+        <div class="slide-tag">GRU → LAX</div>
+        <div class="slide-tag">+ qualquer rota</div>
+      </div>
+
+      <!-- CTA -->
+      <div class="slide slide-cover">
+        <div class="slide-icon-big">✅</div>
+        <div class="slide-eyebrow">Grátis · Free</div>
+        <div class="slide-title">Cria seu <em>primeiro alerta</em> agora</div>
+        <div class="slide-divider"></div>
+        <div class="slide-desc" style="margin-bottom:20px;">É gratuito no plano free · It's free on the free plan · Link na bio</div>
+        <a href="https://www.tkqlhce.com/click-101726045-17072445" target="_blank" class="slide-cta">🔔 Criar alerta · Set alert</a>
+        <a href="https://www.tkqlhce.com/click-101726045-17072392" target="_blank" class="slide-cta-ghost">⭐ Ver plano Pro · See Pro plan</a>
+      </div>
+
+    </div>
+    <div class="download-hint">💡 Dica: tire print de cada slide individualmente para postar no Instagram</div>
+  </div>
+
+
+  <script>
+    function showPage(id, btn) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('page-' + id).classList.add('active');
+      btn.classList.add('active');
+      window.scrollTo(0, 0);
+    }
+  </script>
+
+</body>
+</html>
