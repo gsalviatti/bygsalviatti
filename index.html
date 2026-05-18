@@ -242,6 +242,27 @@
       .about, .work, .videos, .niches, .services, .rates, .cta-section { padding:70px 20px; }
       footer { flex-direction:column; gap:14px; text-align:center; padding:24px 20px; }
     }
+
+    /* STAYS */
+    .stays { padding:100px 48px; background:var(--warm); }
+    .stays-inner { max-width:1200px; margin:0 auto; }
+    .stays-grid { display:grid; grid-template-columns:1fr 1fr; gap:32px; margin-top:48px; }
+    .stay-card { background:var(--white); border-radius:20px; overflow:hidden; box-shadow:0 4px 24px rgba(92,61,46,0.08); transition:transform 0.3s, box-shadow 0.3s; }
+    .stay-card:hover { transform:translateY(-6px); box-shadow:0 16px 48px rgba(92,61,46,0.14); }
+    .stay-img-wrap { aspect-ratio:4/5; overflow:hidden; }
+    .stay-img-wrap img { width:100%; height:100%; object-fit:cover; transition:transform 0.5s ease; }
+    .stay-card:hover .stay-img-wrap img { transform:scale(1.04); }
+    .stay-info { padding:28px; }
+    .stay-tag { font-size:0.7rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--rose); margin-bottom:10px; }
+    .stay-name { font-family:'Playfair Display',serif; font-size:1.4rem; font-weight:700; color:var(--brown); margin-bottom:8px; }
+    .stay-desc { font-size:0.88rem; color:var(--muted); line-height:1.7; }
+    .stay-more { grid-column:1/-1; background:transparent; border:2px dashed var(--sand-dark); border-radius:20px; padding:36px; text-align:center; }
+    .stay-more p { color:var(--muted); font-size:0.9rem; line-height:1.8; }
+    @media(max-width:900px){
+      .stays { padding:70px 20px; }
+      .stays-grid { grid-template-columns:1fr; }
+      .stay-more { grid-column:1; }
+    }
   </style>  
   <script nowprocket data-noptimize="1" data-cfasync="false" data-wpfc-render="false" seraph-accel-crit="1" data-no-defer="1">
     (function () {
@@ -260,6 +281,7 @@
     <a href="#work">Work</a>
     <a href="#videos">Videos</a>
     <a href="#niches">Niches</a>
+    <a href="#stays">Stays</a>
     <a href="#rates">Rates</a>
     <a href="#contact" class="nav-cta">Work With Me</a>
   </div>
@@ -637,6 +659,43 @@
           <li>Ongoing partnership</li>
         </ul>
         <a href="https://wa.me/18062833219?text=Hi%20Gabi!%20Interested%20in%20a%20brand%20campaign." target="_blank" class="rate-btn">Contact Me →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- WHERE I STAY -->
+<section class="stays" id="stays">
+  <div class="stays-inner">
+    <div class="section-header">
+      <div class="section-tag">Real places</div>
+      <h2 class="section-title">Where I <em>stay.</em></h2>
+    </div>
+    <div class="stays-grid">
+      <div class="stay-card">
+        <div class="stay-img-wrap">
+          <img src="assets/stays/rio_airbnb_quarto.jpg" alt="Airbnb quarto — Rio de Janeiro"/>
+        </div>
+        <div class="stay-info">
+          <div class="stay-tag">Airbnb · Rio de Janeiro</div>
+          <div class="stay-name">Ipanema Studio</div>
+          <p class="stay-desc">Quarto com paredes sage green, roupa de cama branca e decoração cuidadosa. Exatamente o tipo de espaço que fotografa bonito e conta uma história.</p>
+        </div>
+      </div>
+      <div class="stay-card">
+        <div class="stay-img-wrap">
+          <img src="assets/stays/rio_airbnb_sala.jpg" alt="Airbnb sala — Rio de Janeiro"/>
+        </div>
+        <div class="stay-info">
+          <div class="stay-tag">Airbnb · Rio de Janeiro</div>
+          <div class="stay-name">Ipanema Studio</div>
+          <p class="stay-desc">Sala e cozinha aberta — piso de madeira, luz natural, bancada de trabalho. Perfeito para conteúdo de work-from-anywhere e lifestyle de viagem.</p>
+        </div>
+      </div>
+      <div class="stay-more">
+        <p>🏨 Mais hospedagens em breve — hotéis nos EUA, Airbnbs na Europa e Itália.<br>
+        Segue <strong>@bygsalviatti</strong> para ver o conteúdo em tempo real.</p>
       </div>
     </div>
   </div>
