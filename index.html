@@ -243,6 +243,23 @@
       footer { flex-direction:column; gap:14px; text-align:center; padding:24px 20px; }
     }
 
+
+    /* STAY SINGLE CARD */
+    .stay-single-card { background:var(--white); border-radius:24px; overflow:hidden; box-shadow:0 4px 32px rgba(92,61,46,0.09); margin-top:48px; display:grid; grid-template-columns:1fr 1fr; }
+    .stay-single-photos { display:grid; grid-template-rows:1fr 1fr; }
+    .stay-single-img { overflow:hidden; aspect-ratio:4/3; }
+    .stay-single-img img { width:100%; height:100%; object-fit:cover; transition:transform 0.5s ease; }
+    .stay-single-card:hover .stay-single-img img { transform:scale(1.03); }
+    .stay-single-info { padding:48px 40px; display:flex; flex-direction:column; justify-content:center; gap:16px; }
+    .stay-details { display:flex; flex-direction:column; gap:8px; margin-top:8px; }
+    .stay-details span { font-size:0.82rem; color:var(--muted); }
+    @media(max-width:900px){
+      .stay-single-card { grid-template-columns:1fr; }
+      .stay-single-photos { grid-template-rows:unset; grid-template-columns:1fr 1fr; }
+      .stay-single-img { aspect-ratio:1/1; }
+      .stay-single-info { padding:28px 20px; }
+    }
+
     /* STAYS */
     .stays { padding:100px 48px; background:var(--warm); }
     .stays-inner { max-width:1200px; margin:0 auto; }
@@ -672,31 +689,29 @@
       <div class="section-tag">Real places</div>
       <h2 class="section-title">Where I <em>stay.</em></h2>
     </div>
-    <div class="stays-grid">
-      <div class="stay-card">
-        <div class="stay-img-wrap">
+    <div class="stay-single-card">
+      <div class="stay-single-photos">
+        <div class="stay-single-img">
           <img src="assets/stays/rio_airbnb_quarto.jpg" alt="Airbnb quarto — Rio de Janeiro"/>
         </div>
-        <div class="stay-info">
-          <div class="stay-tag">Airbnb · Rio de Janeiro</div>
-          <div class="stay-name">Ipanema Studio</div>
-          <p class="stay-desc">Quarto com paredes sage green, roupa de cama branca e decoração cuidadosa. Exatamente o tipo de espaço que fotografa bonito e conta uma história.</p>
-        </div>
-      </div>
-      <div class="stay-card">
-        <div class="stay-img-wrap">
+        <div class="stay-single-img">
           <img src="assets/stays/rio_airbnb_sala.jpg" alt="Airbnb sala — Rio de Janeiro"/>
         </div>
-        <div class="stay-info">
-          <div class="stay-tag">Airbnb · Rio de Janeiro</div>
-          <div class="stay-name">Ipanema Studio</div>
-          <p class="stay-desc">Sala e cozinha aberta — piso de madeira, luz natural, bancada de trabalho. Perfeito para conteúdo de work-from-anywhere e lifestyle de viagem.</p>
+      </div>
+      <div class="stay-single-info">
+        <div class="stay-tag">Airbnb · Rio de Janeiro</div>
+        <div class="stay-name">Entre Copacabana e Ipanema</div>
+        <p class="stay-desc">Studio completo a dois passos das praias mais icônicas do Rio. Paredes sage green, roupa de cama branca, sala aberta com bancada de trabalho e piso de madeira — o tipo de espaço que fotografa bonito em qualquer ângulo e serve de base perfeita para conteúdo de viagem e lifestyle.</p>
+        <div class="stay-details">
+          <span>📍 Zona Sul, Rio de Janeiro</span>
+          <span>🏠 Airbnb</span>
+          <span>✈️ Conteúdo de viagem</span>
         </div>
       </div>
-      <div class="stay-more">
-        <p>🏨 Mais hospedagens em breve — hotéis nos EUA, Airbnbs na Europa e Itália.<br>
-        Segue <strong>@bygsalviatti</strong> para ver o conteúdo em tempo real.</p>
-      </div>
+    </div>
+    <div class="stay-more">
+      <p>🏨 Mais hospedagens em breve — hotéis nos EUA, Airbnbs na Europa e Itália.<br>
+      Segue <strong>@bygsalviatti</strong> para ver o conteúdo em tempo real.</p>
     </div>
   </div>
 </section>
