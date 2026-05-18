@@ -244,6 +244,17 @@
     }
 
 
+
+    /* STAY SECOND CARD */
+    .stay-second-card { background:var(--white); border-radius:24px; overflow:hidden; box-shadow:0 4px 32px rgba(92,61,46,0.09); margin-top:32px; display:grid; grid-template-columns:1fr 1fr; }
+    .stay-second-photos { display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; }
+    .stay-second-photos .stay-single-img:first-child { grid-column: 1 / -1; }
+    @media(max-width:900px){
+      .stay-second-card { grid-template-columns:1fr; }
+      .stay-second-photos { grid-template-columns:1fr 1fr; grid-template-rows:auto; }
+      .stay-second-photos .stay-single-img:first-child { grid-column:1/-1; }
+    }
+
     /* STAY SINGLE CARD */
     .stay-single-card { background:var(--white); border-radius:24px; overflow:hidden; box-shadow:0 4px 32px rgba(92,61,46,0.09); margin-top:48px; display:grid; grid-template-columns:1fr 1fr; }
     .stay-single-photos { display:grid; grid-template-rows:1fr 1fr; }
@@ -709,6 +720,29 @@
         </div>
       </div>
     </div>
+      <div class="stay-second-card">
+        <div class="stay-second-photos">
+          <div class="stay-single-img">
+            <img src="assets/stays/rio2_quarto.jpg" alt="Quarto com remos — Rio de Janeiro"/>
+          </div>
+          <div class="stay-single-img">
+            <img src="assets/stays/rio2_banheiro.jpg" alt="Banheiro design preto — Rio de Janeiro"/>
+          </div>
+          <div class="stay-single-img">
+            <img src="assets/stays/rio2_espelho.jpg" alt="Espelho e wardrobe — Rio de Janeiro"/>
+          </div>
+        </div>
+        <div class="stay-single-info">
+          <div class="stay-tag">Airbnb · Rio de Janeiro</div>
+          <div class="stay-name">Studio Dark & Design</div>
+          <p class="stay-desc">Studio com identidade própria — paredes cinza, remos decorativos na parede, cama plataforma de madeira e banheiro com cuba preta e espelho redondo. Uma estética diferente do Rio, mas igualmente fotogênica.</p>
+          <div class="stay-details">
+            <span>📍 Rio de Janeiro</span>
+            <span>🏠 Airbnb</span>
+            <span>✈️ Conteúdo de viagem</span>
+          </div>
+        </div>
+      </div>
     <div class="stay-more">
       <p>🏨 Mais hospedagens em breve — hotéis nos EUA, Airbnbs na Europa e Itália.<br>
       Segue <strong>@bygsalviatti</strong> para ver o conteúdo em tempo real.</p>
